@@ -1,4 +1,8 @@
 {
   "key.categories.chatty": "Chatty",
-  "key.chatty.voice_settings": "Voice Settings"
+  "key.chatty.voice_settings": "Voice Settings",
+  "chatty.chat_volume": "Chat Volume",
+  "chatty.chat_volume.desc": "Volume of the sounds played by chat",
+  "chatty.head_offset": "Head Offset",
+  "chatty.head_offset.desc": "Overhead message Y offset"
 }

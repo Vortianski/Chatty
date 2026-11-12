@@ -1,0 +1,32 @@
+{
+  "sans": {
+    "sounds": [
+      "chatty:sans"
+    ]
+  },
+  "papyrus": {
+    "sounds": [
+      "chatty:papyrus"
+    ]
+  },
+  "trumpet": {
+    "sounds": [
+      "chatty:trumpet"
+    ]
+  },
+  "trumpet_exposed": {
+    "sounds": [
+      "chatty:trumpet_exposed"
+    ]
+  },
+  "trumpet_weathered": {
+    "sounds": [
+      "chatty:trumpet_weathered"
+    ]
+  },
+  "trumpet_oxidized": {
+    "sounds": [
+      "chatty:trumpet_oxidized"
+    ]
+  }
+}

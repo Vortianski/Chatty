@@ -5,11 +5,19 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import xox.labvorty.chatty.data.ClientConfig;
 import xox.labvorty.chatty.data.handler.VoiceSoundRegistryReloadEvent;
 import xox.labvorty.chatty.data.network.ChatBubblePacket;
 import xox.labvorty.chatty.data.network.VoiceSettingsPacket;
 import xox.labvorty.vortylib.VortyLib;
+import xox.labvorty.vortylib.data.config.ConfigHolder;
+import xox.labvorty.vortylib.data.config.ModEntry;
+import xox.labvorty.vortylib.data.config.ModRegistry;
+import xox.labvorty.vortylib.data.config.SocialType;
+
+import java.util.List;
 
 @EventBusSubscriber
 public class ChattyInitialization {
@@ -26,6 +34,27 @@ public class ChattyInitialization {
                     VoiceSettingsPacket.TYPE,
                     VoiceSettingsPacket.CODEC,
                     VoiceSettingsPacket::handle
+            );
+        });
+    }
+
+    @SubscribeEvent
+    public static void client(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+            ModRegistry.register(
+                    ModEntry.builder("chatty", Component.literal("Chatty"))
+                            .clientConfig(
+                                    ConfigHolder.builder(ClientConfig.SPEC)
+                                            .addDouble(Component.translatable("chatty.chat_volume"), Component.translatable("chatty.chat_volume.desc"), ClientConfig.SOUND_VOLUME, 1, 0, 1, 2)
+                                            .addDouble(Component.translatable("chatty.head_offset"), Component.translatable("chatty.head_offset.desc"), ClientConfig.HEAD_OFFSET, 0.75, 0, 2, 2)
+                                            .build()
+                            )
+                            .addSocial(SocialType.modrinth("https://modrinth.com/mod/chatty-vortianski"))
+                            .addSocial(SocialType.curseforge("https://www.curseforge.com/minecraft/mc-mods/chatty"))
+                            .addSocial(SocialType.github("https://github.com/Vortianski/Chatty"))
+                            .addSocial(SocialType.discord("https://discord.gg/ZesGqhGnAN"))
+                            .addSocial(SocialType.kofi("https://ko-fi.com/vortianski"))
+                            .build()
             );
         });
     }
@@ -96,6 +125,42 @@ public class ChattyInitialization {
                 ResourceLocation.fromNamespaceAndPath("minecraft", "iron_xylophone"),
                 Component.literal("Iron Xylophone"),
                 SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE.value()
+        );
+
+        event.addSound(
+                ResourceLocation.fromNamespaceAndPath("chatty", "sans"),
+                Component.literal("Sans"),
+                ChattySoundEvents.SANS.value()
+        );
+
+        event.addSound(
+                ResourceLocation.fromNamespaceAndPath("chatty", "papyrus"),
+                Component.literal("Papyrus"),
+                ChattySoundEvents.PAPYRUS.value()
+        );
+
+        event.addSound(
+                ResourceLocation.fromNamespaceAndPath("chatty", "trumpet"),
+                Component.literal("Trumpet"),
+                ChattySoundEvents.TRUMPET.value()
+        );
+
+        event.addSound(
+                ResourceLocation.fromNamespaceAndPath("chatty", "trumpet_exposed"),
+                Component.literal("Trumpet Exposed"),
+                ChattySoundEvents.TRUMPET_EXPOSED.value()
+        );
+
+        event.addSound(
+                ResourceLocation.fromNamespaceAndPath("chatty", "trumpet_weathered"),
+                Component.literal("Trumpet Weathered"),
+                ChattySoundEvents.TRUMPET_WEATHERED.value()
+        );
+
+        event.addSound(
+                ResourceLocation.fromNamespaceAndPath("chatty", "trumpet_oxidized"),
+                Component.literal("Trumpet Oxidized"),
+                ChattySoundEvents.TRUMPET_OXIDIZED.value()
         );
     }
 }

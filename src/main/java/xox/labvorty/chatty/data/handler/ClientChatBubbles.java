@@ -15,6 +15,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
+import xox.labvorty.chatty.data.ClientConfig;
 import xox.labvorty.chatty.data.handler.VoiceSoundRegistry;
 import xox.labvorty.chatty.data.network.VoiceSettingsPacket;
 import xox.labvorty.vortylib.data.network.FloatingTextPacket;
@@ -29,7 +30,6 @@ public final class ClientChatBubbles {
     private static final float BASE_SPEED = 0.75f;
     private static final int MAX_TYPE_TICKS = 100;
     private static final int HOLD_TICKS = 60;
-    private static final float SOUND_VOLUME = 0.6f;
     private static final double HEAD_OFFSET = 0.5;
     private static final Map<Integer, Bubble> BUBBLES = new HashMap<>();
     private static ClientLevel lastLevel;
@@ -73,7 +73,7 @@ public final class ClientChatBubbles {
         Component component = Component.literal(trimmed).withStyle(Style.EMPTY.withColor(color & 0xFFFFFF));
 
         FloatingTextPacket packet = FloatingTextPacket.builder(component, Vec3.ZERO)
-                .follow(entity, new Vec3(0.0, entity.getBbHeight() + HEAD_OFFSET, 0.0))
+                .follow(entity, new Vec3(0.0, entity.getBbHeight() + ClientConfig.HEAD_OFFSET.get(), 0.0))
                 .typewriter(speed)
                 .followXRotation(true)
                 .dropShadow(true)
@@ -143,7 +143,7 @@ public final class ClientChatBubbles {
                         entity.getZ(),
                         bubble.sound,
                         SoundSource.PLAYERS,
-                        SOUND_VOLUME,
+                        ClientConfig.SOUND_VOLUME.get().floatValue(),
                         bubble.profile.pitchFor(spoken),
                         false
                 );

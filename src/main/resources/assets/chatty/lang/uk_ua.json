@@ -1,0 +1,8 @@
+{
+  "key.categories.chatty": "Chatty",
+  "key.chatty.voice_settings": "Налаштування голосу",
+  "chatty.chat_volume": "Гучність чату",
+  "chatty.chat_volume.desc": "Гучність повідомлень гравців",
+  "chatty.head_offset": "Зміщення над головою",
+  "chatty.head_offset.desc": "Зміщення повідомлень над головою вздовж осі Y"
+}
